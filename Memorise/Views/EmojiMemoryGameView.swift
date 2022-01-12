@@ -42,21 +42,15 @@ struct CardView:View {
         
         GeometryReader(content: { geometry in
             ZStack {
-                let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
-                if card.isFaceUp {
-                    shape.fill().foregroundColor(.white)
-                    shape.stroke(lineWidth: DrawingConstants.lineWidth)
-                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+                
+                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
                     .padding(5).opacity(DrawingConstants.opacity)
-                    
-                    Text(card.content).font(font(in: geometry.size))
-                        .foregroundColor(Color.orange)
-                    
-                }
-                else {
-                    shape.fill()
-                }
-            }
+                
+                Text(card.content)
+                    .font(font(in: geometry.size))
+                    .foregroundColor(Color.orange)
+                
+            }.cardify(isFaceUp: card.isFaceUp) // custom modifier we created
         })
     }
     
